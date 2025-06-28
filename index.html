@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneySprint - Multi-Purpose Website</title>
+    <meta name="description" content="A complete website featuring blogs, services, portfolio, and more">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <!-- Load Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+
+<!-- Initialize Firebase -->
+<script>
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+</script>
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="main-header">
+        <div class="container">
+            <div class="logo">
+                <a href="/">Money<span>Sprint</span></a>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about/">About</a></li>
+                    <li><a href="/services/">Services</a></li>
+                    <li><a href="/portfolio/">Portfolio</a></li>
+                    <li><a href="/blog/">Blog</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-cta">
+                <a href="/contact/" class="btn">Get Started</a>
+            </div>
+            <div class="auth-buttons">
+    <button id="login-btn" class="btn btn-outline">Login</button>
+    <button id="register-btn" class="btn btn-primary">Register</button>
+</div>
+
+<!-- Auth Modals -->
+<div id="auth-modal" class="auth-modal">
+    <div class="auth-content">
+        <span class="close-auth">&times;</span>
+        <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="login">Login</button>
+            <button class="auth-tab" data-tab="register">Register</button>
+        </div>
+        <div class="auth-forms">
+            <form id="login-form" class="auth-form active">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <form id="register-form" class="auth-form">
+                <div class="form-group">
+                    <label for="register-name">Full Name</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="register-confirm">Confirm Password</label>
+                    <input type="password" id="register-confirm" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+            
+            <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+    </header>
+    
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Welcome to Your Complete Website Solution</h1>
+                <p>We offer everything from content to services in one place</p>
+                <div class="hero-buttons">
+                    <a href="/services/" class="btn btn-primary">Our Services</a>
+                    <a href="/contact/" class="btn btn-secondary">Contact Us</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="assets/87b23182fa700ad32c70b778a442f7f6 copy.jpg" alt="Website illustration" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">What We Offer</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-pen-fancy"></i>
+                    </div>
+                    <h3>Quality Content</h3>
+                    <p>Informative articles, tutorials, and resources on various topics</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Web Services</h3>
+                    <p>Professional web development and design services</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3>Product Reviews</h3>
+                    <p>Honest reviews and recommendations</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Tutorials</h3>
+                    <p>Step-by-step guides and how-tos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <div class="about-image">
+                <img src="/assets/images/about-image.jpg" alt="About us" loading="lazy">
+            </div>
+            <div class="about-content">
+                <h2 class="section-title">About Our Platform</h2>
+                <p>We've created a comprehensive website that serves multiple purposes - from informative content to professional services. Our goal is to be your one-stop destination for quality information and solutions.</p>
+                <ul class="about-list">
+                    <li><i class="fas fa-check"></i> Multi-purpose content strategy</li>
+                    <li><i class="fas fa-check"></i> Professional service offerings</li>
+                    <li><i class="fas fa-check"></i> Regular updates and fresh content</li>
+                    <li><i class="fas fa-check"></i> User-focused design</li>
+                </ul>
+                <a href="/about/" class="btn btn-outline">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Custom website development tailored to your needs</p>
+                    <a href="/services/web-development/" class="service-link">Details <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>SEO Optimization</h3>
+                    <p>Improve your search engine rankings</p>
+                    <a href="/services/seo/" class="service-link">Details <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Graphic Design</h3>
+                    <p>Professional visuals for your brand</p>
+                    <a href="/services/design/" class="service-link">Details <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio">
+        <div class="container">
+            <h2 class="section-title">Featured Work</h2>
+            <div class="portfolio-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+                <button class="filter-btn" data-filter="design">Design</button>
+                <button class="filter-btn" data-filter="content">Content</button>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-category="web">
+                    <img src="/assets/images/portfolio1.jpg" alt="Web Project" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>E-commerce Website</h3>
+                        <a href="/portfolio/project1/" class="portfolio-link"><i class="fas fa-link"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="design">
+                    <img src="/assets/images/portfolio2.jpg" alt="Design Project" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Brand Identity</h3>
+                        <a href="/portfolio/project2/" class="portfolio-link"><i class="fas fa-link"></i></a>
+                    </div>
+                </div>
+                <div class="portfolio-item" data-category="content">
+                    <img src="/assets/images/portfolio3.jpg" alt="Content Project" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <h3>Blog Content Strategy</h3>
+                        <a href="/portfolio/project3/" class="portfolio-link"><i class="fas fa-link"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="portfolio-cta">
+                <a href="/portfolio/" class="btn">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-preview">
+        <div class="container">
+            <h2 class="section-title">Latest From Our Blog</h2>
+            <div class="blog-grid">
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="/assets/images/blog1.jpg" alt="Blog post" loading="lazy">
+                        <span class="blog-category">Web Design</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="/blog/post1/">10 Web Design Trends for 2024</a></h3>
+                        <p class="blog-excerpt">Explore the latest trends shaping the web design industry this year...</p>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> June 15, 2024</span>
+                            <span><i class="far fa-clock"></i> 5 min read</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="/assets/images/blog2.jpg" alt="Blog post" loading="lazy">
+                        <span class="blog-category">SEO</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="/blog/post2/">SEO Strategies That Actually Work</a></h3>
+                        <p class="blog-excerpt">Proven techniques to improve your search engine rankings...</p>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> June 10, 2024</span>
+                            <span><i class="far fa-clock"></i> 8 min read</span>
+                        </div>
+                    </div>
+                </article>
+                <article class="blog-card">
+                    <div class="blog-image">
+                        <img src="/assets/images/blog3.jpg" alt="Blog post" loading="lazy">
+                        <span class="blog-category">Productivity</span>
+                    </div>
+                    <div class="blog-content">
+                        <h3><a href="/blog/post3/">Tools to Boost Your Productivity</a></h3>
+                        <p class="blog-excerpt">Discover the best apps and methods to get more done in less time...</p>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> June 5, 2024</span>
+                            <span><i class="far fa-clock"></i> 6 min read</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="blog-cta">
+                <a href="/blog/" class="btn btn-outline">View All Articles</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-products">
+    <div class="container">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="product-grid" id="product-grid">
+            <!-- Products will be loaded via JavaScript -->
+        </div>
+        <div class="product-modal" id="product-modal">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div class="modal-body">
+                    <div class="modal-images"></div>
+                    <div class="modal-info"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What People Say</h2>
+            <div class="testimonial-slider">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"This website has been an incredible resource for both information and services. Highly recommended!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="/assets/images/client1.jpg" alt="Client" loading="lazy">
+                        <div>
+                            <h4>Sarah Johnson</h4>
+                            <span>Small Business Owner</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <p>"The quality of content is outstanding, and their services are top-notch. Very professional."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="/assets/images/client2.jpg" alt="Client" loading="lazy">
+                        <div>
+                            <h4>Michael Chen</h4>
+                            <span>Marketing Director</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+    
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Get Started?</h2>
+            <p>Whether you need information, services, or just want to explore, we're here to help.</p>
+            <div class="cta-buttons">
+                <a href="/contact/" class="btn btn-primary">Contact Us</a>
+                <a href="/services/" class="btn btn-secondary">Our Services</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+    <div class="container">
+        <h2>Stay Updated</h2>
+        <p>Subscribe to our newsletter for the latest updates and offers</p>
+        <form id="newsletter-form" class="newsletter-form">
+            <input type="email" name="email" placeholder="Your email address" required>
+            <button type="submit" class="btn btn-primary">Subscribe</button>
+        </form>
+        <div id="newsletter-message" class="newsletter-message"></div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>About Us</h3>
+                    <p>YourSite is a multi-purpose platform offering quality content, professional services, and valuable resources.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/delulu.hhun/"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about/">About</a></li>
+                        <li><a href="/services/">Services</a></li>
+                        <li><a href="/portfolio/">Portfolio</a></li>
+                        <li><a href="/blog/">Blog</a></li>
+                        <li><a href="/contact/">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="/services/web-development/">Web Development</a></li>
+                        <li><a href="/services/seo/">SEO Optimization</a></li>
+                        <li><a href="/services/design/">Graphic Design</a></li>
+                        <li><a href="/services/content/">Content Creation</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Purna basti, Jharsuguda , Odisha, India</li>
+                        <li><i class="fas fa-phone"></i> +91 7381749483</li>
+                        <li><i class="fas fa-envelope"></i> kunalmistry232@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MoneySprint. All rights reserved. Designed by Kunal Mistry</p>
+                <div class="footer-links">
+                    <a href="/privacy/">Privacy Policy</a>
+                    <a href="/terms/">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/assets/js/main.js"></script>
+</body>
+</html>
